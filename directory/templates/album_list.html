@@ -1,0 +1,40 @@
+
+<!-- album_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Albums List{% endblock %}
+
+{% block content %}
+    <h2>Albums List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Musician Name</th>
+                <th>Email</th>
+                <th>Album Rating</th>
+                <th>Instrument Type</th>
+                <th>Album Name</th>
+                <th>Release Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for album in object_list %}
+                <tr>
+                    <td>{{ album.id }}</td>
+                    <td>{{ album.musician.first_name }} {{ album.musician.last_name }}</td>
+                    <td>{{ album.musician.email }}</td>
+                    <td>{{ album.rating }}</td>
+                    <td>{{ album.musician.instrument_type }}</td>
+                    <td>{{ album.album_name }}</td>
+                    <td>{{ album.release_date }}</td>
+                    <td>
+                        <a href="{% url 'album_edit' pk=album.id %}" class="btn btn-sm btn-primary">Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'album_add' %}" class="btn btn-success">Add Album</a>
+{% endblock %}

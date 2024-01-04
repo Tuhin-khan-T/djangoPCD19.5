@@ -1,0 +1,18 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}{{ form_title }}{% endblock %}
+
+{% block content %}
+    <h2>{{ form_title }}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <a href="{% url 'album_list' %}" class="btn btn-secondary">Cancel</a>
+    {% if form_title == 'Update Album' %}
+        <a href="{% url 'album_delete' pk=album.id %}" class="btn btn-danger">Delete</a>
+    {% endif %}
+{% endblock %}
